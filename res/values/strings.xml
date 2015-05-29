@@ -1,0 +1,13 @@
+<resources>
+
+    <string name="app_name">HuntShark</string>
+    <string name="recompensa_dois_pontos">"Recompensa:"</string>
+    <string name="investimento_dois_pontos">"Investimento:"</string>
+    <string name="lucro_dois_pontos">"Lucro:"</string>
+    <string name="concurso">"Concurso"</string>
+    <string name="jogo1">"Jogo 1"</string>
+    <string name="jogo2">"Jogo 2"</string>
+    <string name="jogo3">"Jogo 3"</string>
+    <string name="jogo4">"Jogo 4"</string>
+        
+</resources>
