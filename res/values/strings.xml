@@ -9,5 +9,12 @@
     <string name="jogo2">"Jogo 2"</string>
     <string name="jogo3">"Jogo 3"</string>
     <string name="jogo4">"Jogo 4"</string>
+    <string name="concurso_dois_pontos">"Concurso:"</string>
+    <string name="cidade_dois_pontos">"Cidade:"</string>
+    <string name="premio_15_pontos">"Prêmio de 15 pontos:"</string>
+    <string name="premio_14_pontos">"Prêmio de 14 pontos:"</string>
+    <string name="premio_13_pontos">"Prêmio de 13 pontos:"</string>
+    <string name="premio_12_pontos">"Prêmio de 12 pontos:"</string>
+    <string name="premio_11_pontos">"Prêmio de 11 pontos:"</string>
         
 </resources>
