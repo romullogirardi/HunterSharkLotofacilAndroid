@@ -1,10 +1,10 @@
 <resources>
 
-    <string name="app_name">HuntShark</string>
-    <string name="recompensa_dois_pontos">"Recompensa:"</string>
-    <string name="investimento_dois_pontos">"Investimento:"</string>
-    <string name="lucro_dois_pontos">"Lucro:"</string>
-    <string name="concurso">"Concurso"</string>
+    <string name="app_name">Hunter Shark</string>
+    <string name="recompensa_dois_pontos">"Recompensa:\nR$ "</string>
+    <string name="investimento_dois_pontos">"Investimento:\nR$ "</string>
+    <string name="lucro_dois_pontos">"Lucro:\nR$ "</string>
+    <string name="concurso">"ID"</string>
     <string name="jogo1">"Jogo 1"</string>
     <string name="jogo2">"Jogo 2"</string>
     <string name="jogo3">"Jogo 3"</string>
@@ -16,5 +16,13 @@
     <string name="premio_13_pontos">"Prêmio de 13 pontos:"</string>
     <string name="premio_12_pontos">"Prêmio de 12 pontos:"</string>
     <string name="premio_11_pontos">"Prêmio de 11 pontos:"</string>
-        
+    <string name="sair">"Sair"</string>
+    <string name="sair_pergunta">"Deseja sair do aplicativo?"</string>
+    <string name="sim">"Sim"</string>
+    <string name="nao">"Não"</string>
+    <string name="nenhum_concurso_cadastrado">"Nenhum concurso cadastrado"</string>
+    <string name="resultados_do_concurso">"Resultados do concurso "</string>
+    <string name="cancelar">"Cancelar"</string>
+    <string name="salvar">"Salvar"</string>
+    
 </resources>

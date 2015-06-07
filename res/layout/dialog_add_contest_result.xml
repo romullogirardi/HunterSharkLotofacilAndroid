@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+	
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        
+	    <GridLayout 
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:columnCount="5" >
+	        
+	        <ToggleButton 
+			 	android:id="@+id/toogle_button1"
+			 	android:textOn="1"
+			 	android:textOff="1" />
+	
+	        <ToggleButton 
+			 	android:id="@+id/toogle_button2"
+			 	android:textOn="2"
+			 	android:textOff="2" />
+	        
+	        <ToggleButton 
+			 	android:id="@+id/toogle_button3"
+			 	android:textOn="3"
+			 	android:textOff="3" />
+	        
+	        <ToggleButton 
+			 	android:id="@+id/toogle_button4"
+			 	android:textOn="4"
+			 	android:textOff="4" />
+	        
+	        <ToggleButton 
+			 	android:id="@+id/toogle_button5"
+			 	android:textOn="5"
+			 	android:textOff="5" />
+	        
+	        <ToggleButton 
+			 	android:id="@+id/toogle_button6"
+			 	android:textOn="6"
+			 	android:textOff="6" />
+	        
+	        <ToggleButton 
+			 	android:id="@+id/toogle_button7"
+			 	android:textOn="7"
+			 	android:textOff="7" />
+	
+	        <ToggleButton 
+			 	android:id="@+id/toogle_button8"
+			 	android:textOn="8"
+			 	android:textOff="8" />
+	        
+	        <ToggleButton 
+			 	android:id="@+id/toogle_button9"
+			 	android:textOn="9"
+			 	android:textOff="9" />
+	        
+	        <ToggleButton 
+			 	android:id="@+id/toogle_button10"
+			 	android:textOn="10"
+			 	android:textOff="10" />
+	        
+	        <ToggleButton 
+			 	android:id="@+id/toogle_button11"
+			 	android:textOn="11"
+			 	android:textOff="11" />
+	
+	        <ToggleButton 
+			 	android:id="@+id/toogle_button12"
+			 	android:textOn="12"
+			 	android:textOff="12" />
+	        
+	        <ToggleButton 
+			 	android:id="@+id/toogle_button13"
+			 	android:textOn="13"
+			 	android:textOff="13" />
+	        
+	        <ToggleButton 
+			 	android:id="@+id/toogle_button14"
+			 	android:textOn="14"
+			 	android:textOff="14" />
+	        
+	        <ToggleButton 
+			 	android:id="@+id/toogle_button15"
+			 	android:textOn="15"
+			 	android:textOff="15" />
+	
+	        <ToggleButton 
+			 	android:id="@+id/toogle_button16"
+			 	android:textOn="16"
+			 	android:textOff="16" />
+	        
+	        <ToggleButton 
+			 	android:id="@+id/toogle_button17"
+			 	android:textOn="17"
+			 	android:textOff="17" />
+	
+	        <ToggleButton 
+			 	android:id="@+id/toogle_button18"
+			 	android:textOn="18"
+			 	android:textOff="18" />
+	        
+	        <ToggleButton 
+			 	android:id="@+id/toogle_button19"
+			 	android:textOn="19"
+			 	android:textOff="19" />
+	        
+	        <ToggleButton 
+			 	android:id="@+id/toogle_button20"
+			 	android:textOn="20"
+			 	android:textOff="20" />
+	        
+	        <ToggleButton 
+			 	android:id="@+id/toogle_button21"
+			 	android:textOn="21"
+			 	android:textOff="21" />
+	
+	        <ToggleButton 
+			 	android:id="@+id/toogle_button22"
+			 	android:textOn="22"
+			 	android:textOff="22" />
+	        
+	        <ToggleButton 
+			 	android:id="@+id/toogle_button23"
+			 	android:textOn="23"
+			 	android:textOff="23" />
+	        
+	        <ToggleButton 
+			 	android:id="@+id/toogle_button24"
+			 	android:textOn="24"
+			 	android:textOff="24" />
+	        
+	        <ToggleButton 
+			 	android:id="@+id/toogle_button25"
+			 	android:textOn="25"
+			 	android:textOff="25" />
+	        
+	    </GridLayout>
+	    
+	    <DatePicker 
+	        android:id="@+id/date_picker"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content" />
+	
+	    <LinearLayout 
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:orientation="vertical">
+	        
+	        <LinearLayout 
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:orientation="horizontal">
+	            
+	            <TextView 
+	                android:layout_width="0dip"
+	                android:layout_height="wrap_content"
+	                android:layout_weight="1"
+	                android:text="@string/cidade_dois_pontos"/>
+	            
+	            <EditText 
+				 	android:id="@+id/edit_text_city"
+	                android:layout_width="0dip"
+	                android:layout_height="wrap_content"
+	                android:layout_weight="1"
+	                android:inputType="text"/>
+	            
+	        </LinearLayout>
+	        
+	        <LinearLayout 
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:orientation="horizontal">
+	            
+	            <TextView 
+	                android:layout_width="0dip"
+	                android:layout_height="wrap_content"
+	                android:layout_weight="1"
+	                android:text="@string/premio_15_pontos"/>
+	            
+	            <EditText 
+				 	android:id="@+id/edit_text_reward_15_points"
+	                android:layout_width="0dip"
+	                android:layout_height="wrap_content"
+	                android:layout_weight="1"
+	                android:inputType="numberDecimal"/>
+	            
+	        </LinearLayout>
+	
+	        <LinearLayout 
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:orientation="horizontal">
+	            
+	            <TextView 
+	                android:layout_width="0dip"
+	                android:layout_height="wrap_content"
+	                android:layout_weight="1"
+	                android:text="@string/premio_14_pontos"/>
+	            
+	            <EditText 
+				 	android:id="@+id/edit_text_reward_14_points"
+	                android:layout_width="0dip"
+	                android:layout_height="wrap_content"
+	                android:layout_weight="1"
+	                android:inputType="numberDecimal"/>
+	            
+	        </LinearLayout>
+	        
+	        
+	        <LinearLayout 
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:orientation="horizontal">
+	            
+	            <TextView 
+	                android:layout_width="0dip"
+	                android:layout_height="wrap_content"
+	                android:layout_weight="1"
+	                android:text="@string/premio_13_pontos"/>
+	            
+	            <EditText 
+				 	android:id="@+id/edit_text_reward_13_points"
+	                android:layout_width="0dip"
+	                android:layout_height="wrap_content"
+	                android:layout_weight="1"
+	                android:inputType="numberDecimal"/>
+	            
+	        </LinearLayout>
+	        
+	        <LinearLayout 
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:orientation="horizontal">
+	            
+	            <TextView 
+	                android:layout_width="0dip"
+	                android:layout_height="wrap_content"
+	                android:layout_weight="1"
+	                android:text="@string/premio_12_pontos"/>
+	            
+	            <EditText 
+				 	android:id="@+id/edit_text_reward_12_points"
+	                android:layout_width="0dip"
+	                android:layout_height="wrap_content"
+	                android:layout_weight="1"
+	                android:inputType="numberDecimal"/>
+	            
+	        </LinearLayout>
+	        
+	        <LinearLayout 
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:orientation="horizontal">
+	            
+	            <TextView 
+	                android:layout_width="0dip"
+	                android:layout_height="wrap_content"
+	                android:layout_weight="1"
+	                android:text="@string/premio_11_pontos"/>
+	            
+	            <EditText 
+				 	android:id="@+id/edit_text_reward_11_points"
+	                android:layout_width="0dip"
+	                android:layout_height="wrap_content"
+	                android:layout_weight="1"
+	                android:inputType="numberDecimal"/>
+	            
+	        </LinearLayout>
+	        
+	    </LinearLayout>
+
+    </LinearLayout>
+    
+</ScrollView>
