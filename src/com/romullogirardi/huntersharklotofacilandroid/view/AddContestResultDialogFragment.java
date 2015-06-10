@@ -25,31 +25,6 @@ public class AddContestResultDialogFragment extends DialogFragment{
 
 	//UI ELEMENTS
 	private View view;
-//	private ToggleButton toggleButton1;
-//	private ToggleButton toggleButton2;
-//	private ToggleButton toggleButton3;
-//	private ToggleButton toggleButton4;
-//	private ToggleButton toggleButton5;
-//	private ToggleButton toggleButton6;
-//	private ToggleButton toggleButton7;
-//	private ToggleButton toggleButton8;
-//	private ToggleButton toggleButton9;
-//	private ToggleButton toggleButton10;
-//	private ToggleButton toggleButton11;
-//	private ToggleButton toggleButton12;
-//	private ToggleButton toggleButton13;
-//	private ToggleButton toggleButton14;
-//	private ToggleButton toggleButton15;
-//	private ToggleButton toggleButton16;
-//	private ToggleButton toggleButton17;
-//	private ToggleButton toggleButton18;
-//	private ToggleButton toggleButton19;
-//	private ToggleButton toggleButton20;
-//	private ToggleButton toggleButton21;
-//	private ToggleButton toggleButton22;
-//	private ToggleButton toggleButton23;
-//	private ToggleButton toggleButton24;
-//	private ToggleButton toggleButton25;
 	private DatePicker datePicker;
 	private EditText cityEditText;
 	private EditText reward15pointsEditText;
@@ -60,16 +35,11 @@ public class AddContestResultDialogFragment extends DialogFragment{
 	
 	//VARIABLES
 	private String contestID;
-//	private ToggleButton[] toggleButtons = {toggleButton1, toggleButton2, toggleButton3, toggleButton4, toggleButton5, toggleButton6, toggleButton7, toggleButton8, toggleButton9, toggleButton10, toggleButton11, 
-//			toggleButton12, toggleButton13, toggleButton14, toggleButton15, toggleButton16, toggleButton17, toggleButton18, toggleButton19, toggleButton20, toggleButton21, toggleButton22, toggleButton23, toggleButton24, toggleButton25};
 	private ToggleButton[] toggleButtons = new ToggleButton[25];
 	
 	//CONSTRUCTOR
 	public AddContestResultDialogFragment(String contestID) {
 		this.contestID = contestID;
-//		for(ToggleButton toogleButton : toogleButtons) {
-//			toogleButton.setChecked(false);
-//		}
 	}
 	
 	//DIALOGFRAGMENT LIFECYCLE METHODS
@@ -162,6 +132,6 @@ public class AddContestResultDialogFragment extends DialogFragment{
 		float reward11points = Float.parseFloat(reward11pointsEditText.getText().toString());
 		
 		Contest contestResults = new Contest(Integer.parseInt(contestID), date, city, numbers, reward15points, reward14points, reward13points, reward12points, reward11points, false);
-		ContestManager.getInstance().computeLastContest(contestResults, false);
+		ContestManager.getInstance().computeLastContest(contestResults);
 	}
 }

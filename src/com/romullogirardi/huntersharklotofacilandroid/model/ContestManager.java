@@ -17,17 +17,11 @@ public class ContestManager implements Serializable {
 	//SERIALIZATION ID
 	private static final long serialVersionUID = -2791436821648213068L;
 
-	//CONSTANTS
-	public static final int N = 25;
-	public static final int K = 15;
-
 	//ATTRIBUTES
 	private Vector<Contest> contests = new Vector<>();
 	private Vector<NumberFrequency> numbersFrequency;
 	private Vector<GameStrategy> gameStrategies;
-	private CombinationsGenerator combinationsGenerator;
 	private int contestsPartition = -1;
-	private boolean production = false;
 	
 	//IMPLEMENTING AS A SINGLETON
 	private static ContestManager instance = null;
@@ -46,63 +40,30 @@ public class ContestManager implements Serializable {
 	//CONSTRUCTORS
 	public ContestManager() {
 		
-		//Initializing numbersFrequency with 0 from 0 to 99
+		//Initializing numbersFrequency with 0 from 0 to 24
 		numbersFrequency = new Vector<>();
 		for(int index = 1; index <= 25; index++) {
 			numbersFrequency.add(new NumberFrequency(index, 0));
 		}
-
-//		//Initializing gameStrategies with CombinationsGenerator
-//		gameStrategies = new Vector<>();
-//		Integer[] elements = new Integer[N];
-//		for(int index = 1; index <= N; index++) elements[index - 1] = index; 
-//		CombinationsGenerator myCombinationsGenerator = new CombinationsGenerator(elements, K) {
-//			
-//			@Override
-//			public void processCombination(Object[] elements, int[] combination) {
-//				gameStrategies.add(new GameStrategy(combination));
-//			}
-//		};
-//		myCombinationsGenerator.generateCombinations();
 	}
 	
 	//GETTERS AND SETTERS
-	public CombinationsGenerator getCombinationsGenerator() {
-		return combinationsGenerator;
-	}
-
 	public void setContestsPartition(int contestsPartition) {
 		this.contestsPartition = contestsPartition;
+		
+		//Updating the persistence file
+		saveFile();
 	}
 
 	public void setGameStrategies(Vector<GameStrategy> gameStrategies) {
 		this.gameStrategies = gameStrategies;
-	}
-
-	public void setProduction(boolean production) {
-		this.production = production;
+		
+		//Updating the persistence file
+		saveFile();
 	}
 
 	//METHODS
-//	public void initializeGameStrategiesByCombinationsGenerator(int lowestIndex, int highestIndex) {
-//
-//		//Initializing gameStrategies with CombinationsGenerator
-//		gameStrategies = new Vector<>();
-//		Integer[] elements = new Integer[N];
-//		for(int index = 1; index <= N; index++) elements[index - 1] = index; 
-//		combinationsGenerator = new CombinationsGenerator(elements, K) {
-//			
-//			@Override
-//			public void processCombination(Object[] elements, int[] combination) {
-//				gameStrategies.add(new GameStrategy(combination));
-//			}
-//		};
-//		if(lowestIndex != -1) combinationsGenerator.setLowestIndex(lowestIndex);
-//		if(highestIndex != -1) combinationsGenerator.setHighestIndex(highestIndex);
-//		combinationsGenerator.generateCombinations();
-//	}
-	
-	public void computeLastContest(Contest lastContestResult, boolean print) {
+	public void computeLastContest(Contest lastContestResult) {
 		
 		//If exists a contest
 		if(!contests.isEmpty()) {
@@ -122,10 +83,8 @@ public class ContestManager implements Serializable {
 		//Setting next contest recommended games
 		setNextContestRecommendedGames();
 		
-//		//Printing, if necessary
-//		if(print) {
-//			print();
-//		}
+		//Updating the persistence file
+		saveFile();
 	}
 	
 	private void checkLastGames(Contest lastContestResult) {
@@ -166,9 +125,6 @@ public class ContestManager implements Serializable {
 						break;
 					default:
 						break;
-				}
-				if(production) {
-					System.out.println("Concurso " + lastContestResult.getId() + ": Marquei " + numberOfPoints + " pontos e ganhei R$ " + String.format("%.2f", (float) game.getReward()));
 				}
 			}
 			
@@ -291,68 +247,6 @@ public class ContestManager implements Serializable {
 		contests.add(new Contest(nextID, recommendedGames));
 	}
 
-	public void print() {
-		
-		if(production) {
-//			System.out.println("\nTodos os concursos:\n");
-//			for(int index = 0; index < contests.size() - 1; index++) {
-//				System.out.println(contests.get(index).toString());
-//			}
-		
-			System.out.println("\nJogo anterior: ");
-			if((contests.size() - 2) >= 0) {
-				for(Game game : contests.get(contests.size() - 2).getRecommendedGames()) {
-					System.out.println(game.getPoints() + " pontos - Prêmio: R$ " + String.format("%.2f", (float) game.getReward()));
-				}
-			}
-			else {
-				System.out.println("Não há");
-			}
-	
-			System.out.println("\nFrequência dos números");
-			for(NumberFrequency numberFrequency : numbersFrequency) {
-				System.out.println(numberFrequency.getNumber() + " => " + numberFrequency.getFrequency());
-			}
-			
-			System.out.println("\nEstratégias(" + gameStrategies.size() + ")");
-			for(GameStrategy gameStrategy : getRecommendedStrategies(Constants.GAMES_QUANTITY)) {
-				System.out.println(gameStrategy.toString());
-			}
-	
-			float totalRecommendedInvestment = 0;
-			float totalRecommendedReward = 0;
-			float totalBetInvestment = 0;
-			float totalBetReward = 0;
-			for(Contest contest : contests) {
-				totalRecommendedInvestment += contest.getRecommendedInvestment();
-				totalRecommendedReward += contest.getRecommendedReward();
-				totalBetInvestment += contest.getBetInvestment();
-				totalBetReward += contest.getBetReward();
-			}
-			System.out.println("\nInvestimento recomendado: R$ " + String.format("%.2f", (float) totalRecommendedInvestment));
-			System.out.println("Recompensa recomendada: R$ " + String.format("%.2f", (float) totalRecommendedReward));
-			System.out.println("Lucro recomendado: R$ " + String.format("%.2f", (float) (totalRecommendedReward - totalRecommendedInvestment)));
-			System.out.println("Investimento apostado: R$ " + String.format("%.2f", (float) totalBetInvestment));
-			System.out.println("Recompensa apostada: R$ " + String.format("%.2f", (float) totalBetReward));
-			System.out.println("Lucro apostado: R$ " + String.format("%.2f", (float) (totalBetReward - totalBetInvestment)));
-			DateFormat mDateFormat = new SimpleDateFormat("dd/MM/yyyy");
-			System.out.println("Período avaliado: " + mDateFormat.format(contests.firstElement().getDate().getTime()) + " - " + mDateFormat.format(contests.get(contests.size() - 2).getDate().getTime()));
-			
-			System.out.println("\nPróximo jogo: ");
-			for(Game game : contests.lastElement().getRecommendedGames()) {
-				for(int number : game.getNumbers()) {
-					System.out.print(number + "\t");
-				}
-				System.out.println();
-			}
-			System.out.println();
-		}	
-//		else {
-//			//Updating the global GameStrategies ranker
-//			Main.addToBestGameStrategies(getRecommendedStrategies(10));
-//		}
-	}
-	
 	private ArrayList<ArrayList<Integer>> getRecommendedIndexes(int gamesQuantity) {
 		
 		ArrayList<ArrayList<Integer>> indexes = new ArrayList<>();
@@ -395,7 +289,7 @@ public class ContestManager implements Serializable {
 	public String getContestDetails(Contest contest) {
 		
 		String contestDetails = "";
-		contestDetails += "Jogo anterior:\n";
+		contestDetails += "Resultados:\n";
 		if(contests.indexOf(contest) != 0) {
 			for(Game game : contests.get(contests.indexOf(contest) - 1).getRecommendedGames()) {
 				contestDetails += game.getPoints() + " pontos - Prêmio: R$ " + String.format("%.2f", (float) game.getReward()) + "\n";
@@ -410,11 +304,6 @@ public class ContestManager implements Serializable {
 			contestDetails += numberFrequency.getNumber() + " => " + numberFrequency.getFrequency() + "\n";
 		}
 		
-		contestDetails += "\nEstratégias(" + gameStrategies.size() + ")\n";
-		for(GameStrategy gameStrategy : getRecommendedStrategies(Constants.GAMES_QUANTITY)) {
-			contestDetails += gameStrategy.toString() + "\n";
-		}
-
 		float totalRecommendedInvestment = getRecommendedInvestment();
 		float totalRecommendedReward = getRecommendedReward();
 		float totalBetInvestment = getBetInvestment();

@@ -1,4 +1,4 @@
-package com.romullogirardi.huntersharklotofacilandroid.view;
+package com.romullogirardi.huntersharklotofacilandroid.view; 
 
 import java.text.DecimalFormat;
 import java.util.Vector;
@@ -49,7 +49,6 @@ public class MainActivity extends Activity implements OnItemClickListener {
 		gameStrategies.add(new GameStrategy(indexes4));
 		ContestManager.getInstance().setGameStrategies(gameStrategies);
 		ContestManager.getInstance().setContestsPartition(30);
-		ContestManager.getInstance().setProduction(true);
 
 		//Reading application persistence file
 		ContestManager.getInstance().readFile();

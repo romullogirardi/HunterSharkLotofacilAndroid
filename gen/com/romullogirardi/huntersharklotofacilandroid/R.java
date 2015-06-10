@@ -20,11 +20,10 @@ public final class R {
         public static final int gradient_bg_light=0x7f020006;
         public static final int gradient_bg_red=0x7f020007;
         public static final int ic_bet=0x7f020008;
-        public static final int ic_launcher=0x7f020009;
-        public static final int ic_launcher_shark=0x7f02000a;
-        public static final int ic_print=0x7f02000b;
-        public static final int ic_results=0x7f02000c;
-        public static final int list_selector=0x7f02000d;
+        public static final int ic_launcher_shark=0x7f020009;
+        public static final int ic_print=0x7f02000a;
+        public static final int ic_results=0x7f02000b;
+        public static final int list_selector=0x7f02000c;
     }
     public static final class id {
         public static final int date_picker=0x7f060026;
@@ -114,17 +113,6 @@ public final class R {
             res/values-vXX/styles.xml, while customizations related to
             backward-compatibility can go here.
         
-
-        Base application theme for API 11+. This theme completely replaces
-        AppBaseTheme from res/values/styles.xml on API 11+ devices.
-    
- API 11 theme customizations can go here. 
-
-        Base application theme for API 14+. This theme completely replaces
-        AppBaseTheme from BOTH res/values/styles.xml and
-        res/values-v11/styles.xml on API 14+ devices.
-    
- API 14 theme customizations can go here. 
          */
         public static final int AppBaseTheme=0x7f050000;
         /**  Application theme. 

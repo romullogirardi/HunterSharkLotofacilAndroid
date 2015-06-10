@@ -25,10 +25,10 @@ public class ContestsAdapter extends BaseAdapter {
 	private Vector<Contest> contests;
 
 	//CONSTRUTOR
-	public ContestsAdapter(Activity context, Vector<Contest> itemsAmount) {
+	public ContestsAdapter(Activity context, Vector<Contest> contests) {
 		this.context = context;
 		this.inflater = LayoutInflater.from(context);
-		this.contests = itemsAmount;
+		this.contests = contests;
 	}
 
 	//IMPLEMENTAÇÃO DE MÉTODOS DE BaseAdapter
@@ -97,7 +97,7 @@ public class ContestsAdapter extends BaseAdapter {
 			
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(context, "Apostado", Toast.LENGTH_LONG).show();
+				Toast.makeText(context, "Apostar", Toast.LENGTH_LONG).show();
 			}
 		});
 		
