@@ -6,6 +6,8 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+import com.romullogirardi.huntersharklotofacilandroid.model.GlobalReferences;
+
 public class FileManipulator {
 
 	public synchronized void saveObject(final String filePath, final Object object) {
@@ -16,7 +18,7 @@ public class FileManipulator {
 				FileOutputStream fileOutStream;
 				ObjectOutputStream objOutStream;
 				try {
-					fileOutStream = new FileOutputStream(new File(filePath), false);
+					fileOutStream = new FileOutputStream(new File(GlobalReferences.applicationContext.getExternalFilesDir(null), filePath), false);
 					objOutStream = new ObjectOutputStream(fileOutStream);
 					objOutStream.writeObject(object);
 					objOutStream.flush();
@@ -38,7 +40,7 @@ public class FileManipulator {
 		FileInputStream fileInStream;
 		ObjectInputStream objInStream;
 		try {
-			fileInStream = new FileInputStream(new File(filePath));
+			fileInStream = new FileInputStream(new File(GlobalReferences.applicationContext.getExternalFilesDir(null), filePath));
 			objInStream = new ObjectInputStream(fileInStream);
 			object = objInStream.readObject();
 			objInStream.close();

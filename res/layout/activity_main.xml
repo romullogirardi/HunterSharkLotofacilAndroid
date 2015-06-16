@@ -98,7 +98,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-        	android:background="@drawable/gradient_bg_dark_green"
+        	android:background="@drawable/gradient_bg_green"
             android:text="@string/lucro_dois_pontos"/>
         
 	</LinearLayout>

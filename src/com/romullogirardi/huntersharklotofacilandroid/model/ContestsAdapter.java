@@ -7,6 +7,8 @@ import com.romullogirardi.huntersharklotofacilandroid.view.AddContestResultDialo
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -92,12 +94,33 @@ public class ContestsAdapter extends BaseAdapter {
 			}
 		});
 		
-		viewHolder.betImageView.setEnabled(!contest.isBet());
+		viewHolder.betImageView.setEnabled(contest.getNumbers() == null && !contest.isBet());
 		viewHolder.betImageView.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(context, "Apostar", Toast.LENGTH_LONG).show();
+				AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(GlobalReferences.applicationContext);
+				dialogBuilder.setTitle("Apostar");
+				dialogBuilder.setMessage("Os jogos do concurso " + contest.getId() + " foram apostados?");
+				
+				dialogBuilder.setNegativeButton("Não", new DialogInterface.OnClickListener() {
+					
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						dialog.dismiss();
+					}
+				});
+
+				dialogBuilder.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+					
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						contest.setBet(true);
+						dialog.dismiss();
+					}
+				});
+				
+				dialogBuilder.create().show();
 			}
 		});
 		

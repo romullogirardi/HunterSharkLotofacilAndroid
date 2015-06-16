@@ -9,7 +9,7 @@ public class Game implements Serializable {
 	private static final long serialVersionUID = -611436311818024239L;
 	
 	//ATTRIBUTES
-	private ArrayList<Integer> numbers = new ArrayList<>();
+	private ArrayList<Integer> numbers = new ArrayList<Integer>();
 	private int points = -1;
 	private float investment = Constants.GAME_PRIZE;
 	private float reward = 0;

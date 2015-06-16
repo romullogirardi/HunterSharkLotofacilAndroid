@@ -12,7 +12,7 @@ import org.jsoup.select.Elements;
 
 import android.content.Context;
 
-public class HTMLParser{ 
+public class HTMLParserFromFile{ 
 	
 	//CONSTANTS
 	private static final String HTML_FILE_NAME = "D_LOTFAC.HTM";
@@ -51,7 +51,6 @@ public class HTMLParser{
 
 	//ATTRIBUTES
 	private static Document htmlFile;
-	private static boolean isHtmlEnough = true;
 	
 	//METHODS
 	private static void parseHtmlFile(Context context) {
@@ -213,14 +212,9 @@ public class HTMLParser{
 			}
 			
 			//Adding a contest, if it´s valid
-			if(id != -1) {
-				ContestManager.getInstance().computeLastContest(new Contest(id, date, place, numbers, reward15points, reward14points, reward13points, reward12points, reward11points, false));
+			if(id != -1 && id >= Constants.INITIAL_CONTEST_ID) {
+				ContestManager.getInstance().computeLastContest(new Contest(id, date, place, numbers, reward15points, reward14points, reward13points, reward12points, reward11points));
 			}
-		}
-		
-		//Reading additional contests, if necessary
-		if(!isHtmlEnough) {
-			readAdditionalContests();
 		}
 	}
 	
@@ -228,14 +222,5 @@ public class HTMLParser{
 		String temp = notFloatStringFormat.replace(".", "");
 		String floatStringFormat = temp.replace(",", ".");
 		return floatStringFormat;
-	}
-	
-	private static void readAdditionalContests() {
-		int[] numbers1 = {1, 2, 3, 7, 10, 12, 14, 15, 17, 18, 20, 21, 22, 23, 24};
-		ContestManager.getInstance().computeLastContest(new Contest(1216, new GregorianCalendar(2015, 5, 01), "OSASCO/SP", numbers1, (float) 775596.57, (float) 1435.45, (float) 20, (float) 8, (float) 4, false));
-		int[] numbers2 = {1, 3, 6, 7, 8, 9, 10, 11, 12, 13, 17, 19, 20, 24, 25};
-		ContestManager.getInstance().computeLastContest(new Contest(1217, new GregorianCalendar(2015, 5, 03), "PIQUEROBI/SP", numbers2, (float) 1984077.81, (float) 2394.06, (float) 20, (float) 8, (float) 4, true));
-		int[] numbers3 = {1 , 2, 3, 4, 5, 7, 9, 10, 11, 13, 14, 18, 20, 21, 23};
-		ContestManager.getInstance().computeLastContest(new Contest(1218, new GregorianCalendar(2015, 5, 05), "OSASCO/SP", numbers3, (float) 1052205.73, (float) 2394.06, (float) 20, (float) 8, (float) 4, true));
 	}
 }

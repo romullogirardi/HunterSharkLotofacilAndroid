@@ -96,7 +96,7 @@ public class GameStrategy implements Comparable<GameStrategy>, Serializable {
 
 	//OTHER METHODS
 	public float getScore() {
-		return (float) ((HTMLParser.DEFAULT_REWARD_15_POINTS * frequency15points + HTMLParser.DEFAULT_REWARD_14_POINTS * frequency14points + HTMLParser.DEFAULT_REWARD_13_POINTS * frequency13points + HTMLParser.DEFAULT_REWARD_12_POINTS * frequency12points + HTMLParser.DEFAULT_REWARD_11_POINTS * frequency11points) / (HTMLParser.DEFAULT_REWARD_15_POINTS + HTMLParser.DEFAULT_REWARD_14_POINTS + HTMLParser.DEFAULT_REWARD_13_POINTS + HTMLParser.DEFAULT_REWARD_12_POINTS + HTMLParser.DEFAULT_REWARD_11_POINTS));
+		return (float) ((HTMLParserFromFile.DEFAULT_REWARD_15_POINTS * frequency15points + HTMLParserFromFile.DEFAULT_REWARD_14_POINTS * frequency14points + HTMLParserFromFile.DEFAULT_REWARD_13_POINTS * frequency13points + HTMLParserFromFile.DEFAULT_REWARD_12_POINTS * frequency12points + HTMLParserFromFile.DEFAULT_REWARD_11_POINTS * frequency11points) / (HTMLParserFromFile.DEFAULT_REWARD_15_POINTS + HTMLParserFromFile.DEFAULT_REWARD_14_POINTS + HTMLParserFromFile.DEFAULT_REWARD_13_POINTS + HTMLParserFromFile.DEFAULT_REWARD_12_POINTS + HTMLParserFromFile.DEFAULT_REWARD_11_POINTS));
 	}
 	
 	public String toString() {

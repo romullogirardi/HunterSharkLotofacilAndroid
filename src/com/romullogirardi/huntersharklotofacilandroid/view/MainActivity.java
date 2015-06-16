@@ -1,6 +1,5 @@
-package com.romullogirardi.huntersharklotofacilandroid.view; 
+package com.romullogirardi.huntersharklotofacilandroid.view;
 
-import java.text.DecimalFormat;
 import java.util.Vector;
 
 import android.app.Activity;
@@ -52,6 +51,7 @@ public class MainActivity extends Activity implements OnItemClickListener {
 
 		//Reading application persistence file
 		ContestManager.getInstance().readFile();
+		ContestManager.getInstance().setSaveModifications(true);
 
 		//Initializing UI elements
 		contestsListView = (ListView) findViewById(R.id.list_view_contests);
@@ -123,13 +123,19 @@ public class MainActivity extends Activity implements OnItemClickListener {
 	}
 	
 	//OTHER METHODS
-	private void loadContestsListView() {
+	@SuppressWarnings("deprecation")
+	public void loadContestsListView() {
 		if (!ContestManager.getInstance().getContestsToShow().isEmpty()) {
-			DecimalFormat decimalFormat = new DecimalFormat("0.00");
 			contestsListView.setAdapter(new ContestsAdapter(this, ContestManager.getInstance().getContestsToShow()));
-			rewardTextView.setText(getResources().getString(R.string.recompensa_dois_pontos) + decimalFormat.format(ContestManager.getInstance().getBetReward()));
-			investmentTextView.setText(getResources().getString(R.string.investimento_dois_pontos) + decimalFormat.format(ContestManager.getInstance().getBetInvestment()));
-			profitTextView.setText(getResources().getString(R.string.lucro_dois_pontos) + decimalFormat.format(ContestManager.getInstance().getBetReward() - ContestManager.getInstance().getBetInvestment()));
+			rewardTextView.setText(getResources().getString(R.string.recompensa_dois_pontos) + String.format("%.2f", ContestManager.getInstance().getBetReward()));
+			investmentTextView.setText(getResources().getString(R.string.investimento_dois_pontos) + String.format("%.2f", ContestManager.getInstance().getBetInvestment()));
+			profitTextView.setText(getResources().getString(R.string.lucro_dois_pontos) + String.format("%.2f", ContestManager.getInstance().getBetReward() - ContestManager.getInstance().getBetInvestment()));
+			if((ContestManager.getInstance().getBetReward() - ContestManager.getInstance().getBetInvestment()) < 0) {
+				profitTextView.setBackgroundDrawable(getResources().getDrawable(R.drawable.gradient_bg_red));
+			}
+			else {
+				profitTextView.setBackgroundDrawable(getResources().getDrawable(R.drawable.gradient_bg_green));
+			}
 			contestsListView.setVisibility(View.VISIBLE);
 			rewardTextView.setVisibility(View.VISIBLE);
 			investmentTextView.setVisibility(View.VISIBLE);

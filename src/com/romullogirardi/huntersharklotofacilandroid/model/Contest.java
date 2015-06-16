@@ -23,7 +23,7 @@ public class Contest implements Serializable {
 	private float reward13points;
 	private float reward12points;
 	private float reward11points;
-	private ArrayList<Game> recommendedGames = new ArrayList<>();
+	private ArrayList<Game> recommendedGames = new ArrayList<Game>();
 	private float recommendedInvestment = 0;
 	private float recommendedReward = 0;
 	private boolean bet = false;
@@ -31,9 +31,8 @@ public class Contest implements Serializable {
 	private float betReward = 0;
 	
 	//CONSTRUCTORS
-	public Contest(int id, Calendar date, String place, int[] numbers,
-			float reward15points, float reward14points, float reward13points,
-			float reward12points, float reward11points, boolean bet) {
+	public Contest(int id, Calendar date, String place, int[] numbers, float reward15points, 
+			float reward14points, float reward13points, float reward12points, float reward11points) {
 		this.id = id;
 		this.date = date;
 		this.place = place;
@@ -43,7 +42,6 @@ public class Contest implements Serializable {
 		this.reward13points = reward13points;
 		this.reward12points = reward12points;
 		this.reward11points = reward11points;
-		this.bet = bet;
 	}
 
 	public Contest(int id, ArrayList<Game> recommendedGames) {
