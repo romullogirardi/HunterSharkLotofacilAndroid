@@ -264,6 +264,16 @@ public class ContestManager implements Serializable {
 		HTMLParserFromFile.readContestsFromHTMLFile(GlobalReferences.applicationContext);
 	}
 	
+	private void removeUselessContests() {
+		Vector<Contest> usefulContests = new Vector<Contest>();
+		for(Contest contest : contests) {
+			if(contest.getId() >= Constants.INITIAL_CONTEST_ID) {
+				usefulContests.add(contest);
+			}
+		}
+		contests = new Vector<Contest>(usefulContests);
+	}
+	
 	public Vector<Contest> getContestsToShow() {
 		
 		Vector<Contest> contestsToShow = new Vector<Contest>();
@@ -392,6 +402,7 @@ public class ContestManager implements Serializable {
 		}
 		else {
 			populateContests();
+			removeUselessContests();
 		}
 	}
 
