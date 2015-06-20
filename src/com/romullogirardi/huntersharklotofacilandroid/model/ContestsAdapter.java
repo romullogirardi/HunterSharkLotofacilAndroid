@@ -2,9 +2,6 @@ package com.romullogirardi.huntersharklotofacilandroid.model;
 
 import java.util.Vector;
 
-import com.romullogirardi.huntersharklotofacilandroid.R;
-import com.romullogirardi.huntersharklotofacilandroid.view.AddContestResultDialogFragment;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -17,6 +14,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.romullogirardi.huntersharklotofacilandroid.R;
 
 @SuppressLint("InflateParams")
 public class ContestsAdapter extends BaseAdapter {
@@ -129,8 +128,7 @@ public class ContestsAdapter extends BaseAdapter {
 			
 			@Override
 			public void onClick(View v) {
-				AddContestResultDialogFragment dialog = new AddContestResultDialogFragment(String.valueOf(contest.getId()));
-				dialog.show(context.getFragmentManager(), dialog.getClass().getSimpleName());
+				new HTMLParserFromURL().execute(String.valueOf(contest.getId()));
 			}
 		});
 		

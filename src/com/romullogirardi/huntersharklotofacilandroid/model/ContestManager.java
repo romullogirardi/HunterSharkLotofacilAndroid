@@ -344,15 +344,15 @@ public class ContestManager implements Serializable {
 			contestDetails += "Lucro: R$ " + String.format("%.2f", (contest.getBetReward() - contest.getBetInvestment())) + "\n";
 		}
 		
-		contestDetails += "\nFrequência dos números:\n";
-		for(NumberFrequency numberFrequency : numbersFrequency) {
-			contestDetails += numberFrequency.getNumber() + " => " + numberFrequency.getFrequency() + "\n";
-		}
-
-		contestDetails += "\nTodos os concursos:\n";
-		for(int index = 0; index < contests.size() - 1; index++) {
-			contestDetails += contests.get(index).toString() + "\n";
-		}
+//		contestDetails += "\nFrequência dos números:\n";
+//		for(NumberFrequency numberFrequency : numbersFrequency) {
+//			contestDetails += numberFrequency.getNumber() + " => " + numberFrequency.getFrequency() + "\n";
+//		}
+//
+//		contestDetails += "\nTodos os concursos:\n";
+//		for(int index = 0; index < contests.size() - 1; index++) {
+//			contestDetails += contests.get(index).toString() + "\n";
+//		}
 
 		return contestDetails;
 	}
