@@ -15,6 +15,9 @@
 		    android:layout_height="wrap_content"
 		    android:layout_weight="1"
 		    android:gravity="center"
+		    android:textColor="@android:color/white"
+		    android:textStyle="bold"
+		    android:textSize="@dimen/text_size_header"
 		    android:text="@string/concurso"/>
 	
 		<TextView 
@@ -22,6 +25,9 @@
 		    android:layout_height="wrap_content"
 		    android:layout_weight="1"
 		    android:gravity="center"
+		    android:textColor="@android:color/white"
+		    android:textStyle="bold"
+		    android:textSize="@dimen/text_size_header"
 		    android:text="@string/jogo1"/>
 	
 		<TextView 
@@ -29,6 +35,9 @@
 		    android:layout_height="wrap_content"
 		    android:layout_weight="1"
 		    android:gravity="center"
+		    android:textColor="@android:color/white"
+		    android:textStyle="bold"
+		    android:textSize="@dimen/text_size_header"
 		    android:text="@string/jogo2"/>
 	
 		<TextView 
@@ -36,6 +45,9 @@
 		    android:layout_height="wrap_content"
 		    android:layout_weight="1"
 		    android:gravity="center"
+		    android:textColor="@android:color/white"
+		    android:textStyle="bold"
+		    android:textSize="@dimen/text_size_header"
 		    android:text="@string/jogo3"/>
 	
 		<TextView 
@@ -43,6 +55,9 @@
 		    android:layout_height="wrap_content"
 		    android:layout_weight="1"
 		    android:gravity="center"
+		    android:textColor="@android:color/white"
+		    android:textStyle="bold"
+		    android:textSize="@dimen/text_size_header"
 		    android:text="@string/jogo4"/>
 	
 		<Space 
@@ -80,7 +95,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-        	android:background="@drawable/gradient_bg_green"
+        	android:background="@color/green"
+        	android:textColor="@android:color/white"
+        	android:textStyle="bold"
             android:text="@string/recompensa_dois_pontos"/>
         
         <TextView 
@@ -89,7 +106,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-        	android:background="@drawable/gradient_bg_red"
+        	android:background="@color/orange"
+        	android:textColor="@android:color/white"
+        	android:textStyle="bold"
             android:text="@string/investimento_dois_pontos"/>
         
         <TextView
@@ -98,7 +117,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-        	android:background="@drawable/gradient_bg_green"
+        	android:background="@color/green"
+        	android:textColor="@android:color/white"
+        	android:textStyle="bold"
             android:text="@string/lucro_dois_pontos"/>
         
 	</LinearLayout>

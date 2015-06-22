@@ -131,10 +131,10 @@ public class MainActivity extends Activity implements OnItemClickListener {
 			investmentTextView.setText(getResources().getString(R.string.investimento_dois_pontos) + String.format("%.2f", ContestManager.getInstance().getBetInvestment()));
 			profitTextView.setText(getResources().getString(R.string.lucro_dois_pontos) + String.format("%.2f", ContestManager.getInstance().getBetReward() - ContestManager.getInstance().getBetInvestment()));
 			if((ContestManager.getInstance().getBetReward() - ContestManager.getInstance().getBetInvestment()) < 0) {
-				profitTextView.setBackgroundDrawable(getResources().getDrawable(R.drawable.gradient_bg_red));
+				profitTextView.setBackgroundColor(getResources().getColor(R.color.orange));
 			}
 			else {
-				profitTextView.setBackgroundDrawable(getResources().getDrawable(R.drawable.gradient_bg_green));
+				profitTextView.setBackgroundColor(getResources().getColor(R.color.green));
 			}
 			contestsListView.setVisibility(View.VISIBLE);
 			rewardTextView.setVisibility(View.VISIBLE);
