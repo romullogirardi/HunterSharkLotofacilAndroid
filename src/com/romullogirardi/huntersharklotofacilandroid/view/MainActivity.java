@@ -123,7 +123,6 @@ public class MainActivity extends Activity implements OnItemClickListener {
 	}
 	
 	//OTHER METHODS
-	@SuppressWarnings("deprecation")
 	public void loadContestsListView() {
 		if (!ContestManager.getInstance().getContestsToShow().isEmpty()) {
 			contestsListView.setAdapter(new ContestsAdapter(this, ContestManager.getInstance().getContestsToShow()));

@@ -135,6 +135,7 @@ public class ContestsAdapter extends BaseAdapter {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						contest.setBet(true);
+						ContestsAdapter.this.notifyDataSetChanged();
 						dialog.dismiss();
 					}
 				});
