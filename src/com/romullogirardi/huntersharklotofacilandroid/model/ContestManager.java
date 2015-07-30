@@ -132,7 +132,7 @@ public class ContestManager implements Serializable {
 			//Increasing total investment and reward
 			totalRecommendedInvestment += game.getInvestment();
 			totalRecommendedReward += game.getReward();
-			if(contests.lastElement().isBet()) {
+			if(lastContestResult.isBet()) {
 				totalBetInvestment += game.getInvestment();
 				totalBetReward += game.getReward();
 			}
@@ -156,6 +156,7 @@ public class ContestManager implements Serializable {
 		contests.lastElement().setReward13points(lastContestResult.getReward13points());
 		contests.lastElement().setReward12points(lastContestResult.getReward12points());
 		contests.lastElement().setReward11points(lastContestResult.getReward11points());
+		contests.lastElement().setBet(lastContestResult.isBet());
 	}
 	
 	private void updateControllers(Contest lastContestResult) {

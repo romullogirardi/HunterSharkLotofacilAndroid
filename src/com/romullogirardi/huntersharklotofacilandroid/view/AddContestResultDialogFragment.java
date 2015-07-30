@@ -126,6 +126,7 @@ public class AddContestResultDialogFragment extends DialogFragment{
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				addContestResults();
+				((MainActivity) getActivity()).setAfterManualInput(true);
 				((MainActivity) getActivity()).loadContestsListView();
 				dialog.dismiss();
 			}
@@ -155,6 +156,7 @@ public class AddContestResultDialogFragment extends DialogFragment{
 		float reward11points = Float.parseFloat(reward11pointsEditText.getText().toString());
 		
 		Contest contestResults = new Contest(Integer.parseInt(contestID), date, city, numbers, reward15points, reward14points, reward13points, reward12points, reward11points);
+		contestResults.setBet(ContestManager.getInstance().getContestsToShow().lastElement().isBet());
 		ContestManager.getInstance().computeLastContest(contestResults);
 	}
 }

@@ -8,11 +8,13 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import com.romullogirardi.huntersharklotofacilandroid.utils.CustomWidgets;
 import com.romullogirardi.huntersharklotofacilandroid.view.AddContestResultDialogFragment;
 import com.romullogirardi.huntersharklotofacilandroid.view.MainActivity;
 
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
+import android.widget.Toast;
 
 public class HTMLParserFromURL extends AsyncTask<String, Void, Contest> {
 	
@@ -29,7 +31,6 @@ public class HTMLParserFromURL extends AsyncTask<String, Void, Contest> {
     protected void onPreExecute() {
         super.onPreExecute();
         progressDialog = new ProgressDialog(GlobalReferences.applicationContext);
-//        progressDialog.setMessage("Carregando os dados do concurso " + contestID + "...");
         progressDialog.setMessage("Carregando os dados do concurso...");
         progressDialog.setIndeterminate(false);
         progressDialog.setCancelable(false);
@@ -47,7 +48,7 @@ public class HTMLParserFromURL extends AsyncTask<String, Void, Contest> {
 		try {
 			htmlFile = Jsoup.connect(URL).get();
 		} catch (IOException e) {
-			e.printStackTrace();
+			CustomWidgets.showToast("Falha no carregamento", Toast.LENGTH_LONG);
 		}
 		
 		//Reading contests from HTML file		

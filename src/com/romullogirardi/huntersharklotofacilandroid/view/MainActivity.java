@@ -5,6 +5,9 @@ import java.util.Vector;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.media.AudioManager;
+import android.media.SoundPool;
+import android.media.SoundPool.OnLoadCompleteListener;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -18,8 +21,12 @@ import com.romullogirardi.huntersharklotofacilandroid.model.ContestManager;
 import com.romullogirardi.huntersharklotofacilandroid.model.ContestsAdapter;
 import com.romullogirardi.huntersharklotofacilandroid.model.GameStrategy;
 import com.romullogirardi.huntersharklotofacilandroid.model.GlobalReferences;
+import com.romullogirardi.huntersharklotofacilandroid.model.network.AckReceiverThread;
+import com.romullogirardi.huntersharklotofacilandroid.model.network.Communicator;
+import com.romullogirardi.huntersharklotofacilandroid.model.network.CommunicatorListener;
+import com.romullogirardi.huntersharklotofacilandroid.model.network.MessageReceiverThread;
 
-public class MainActivity extends Activity implements OnItemClickListener {
+public class MainActivity extends Activity implements OnItemClickListener, CommunicatorListener {
 	
 	//UI ELEMENTS
 	private ListView contestsListView;
@@ -27,6 +34,27 @@ public class MainActivity extends Activity implements OnItemClickListener {
 	private TextView investmentTextView;
 	private TextView profitTextView;
 	private TextView emptyContestsTextView;
+	
+	//SOUND ELEMENTS
+	//AudioManager
+	private AudioManager mAudioManager;
+	//SoundPool
+	private SoundPool mSoundPool;
+	//SoundIDs
+	private int shortSharkAttackSoundID;
+	private int mediumSharkAttackSoundID;
+	private int longSharkAttackSoundID;
+	//Audio volume
+	private float mStreamVolume;
+
+	
+	//VARIABLE
+	private boolean afterManualInput = false;
+	
+	//SETTER
+	public void setAfterManualInput(boolean afterManualInput) {
+		this.afterManualInput = afterManualInput;
+	}
 
 	//ACTIVITY LIFECYCLE METHODS
 	@Override
@@ -63,6 +91,9 @@ public class MainActivity extends Activity implements OnItemClickListener {
 		//Setting UI elements listeners
 		contestsListView.setOnItemClickListener(this);
 		
+		//Setting Communicator
+		Communicator.setInstance(new Communicator(this));
+		
 		//Loading listView with contests
 		loadContestsListView();
 	}
@@ -70,9 +101,59 @@ public class MainActivity extends Activity implements OnItemClickListener {
 	@Override
 	protected void onResume() {
 		super.onResume();
+		
+		//Manage sound using AudioManager.STREAM_MUSIC as stream type
+		mAudioManager = (AudioManager) getSystemService(AUDIO_SERVICE);
+		mStreamVolume = (float) mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC) / mAudioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
+
+		//Make a new SoundPool, allowing up to 10 streams
+		mSoundPool = new SoundPool(10, AudioManager.STREAM_MUSIC, 0);
+
+		//Set a SoundPool OnLoadCompletedListener
+		mSoundPool.setOnLoadCompleteListener(new OnLoadCompleteListener() {
+
+			@Override
+			public void onLoadComplete(SoundPool soundPool, int sampleId, int status) {
+				if (status == 0) {
+//					updateUI();
+				}
+			}
+		});
+
+		//Load the sounds from res/raw (.wav)
+//		shortSharkAttackSoundID = mSoundPool.load(this, R.raw.certo, 1);
+//		mediumSharkAttackSoundID = mSoundPool.load(this, R.raw.errado, 1);
+//		longSharkAttackSoundID = mSoundPool.load(this, R.raw.teste_finalizado, 1);
+
+		mAudioManager.setSpeakerphoneOn(true);
+		mAudioManager.loadSoundEffects();
+
 		loadContestsListView();
+		if(afterManualInput) {
+			//Notify reward
+			mSoundPool.play(shortSharkAttackSoundID, mStreamVolume, mStreamVolume, 1, 0, 1.0f);
+		}
+		afterManualInput = false;
 	}	
 		
+	@Override
+	protected void onPause() {
+
+		//Release all SoundPool resources
+		if (mSoundPool != null) {
+			mSoundPool.unload(shortSharkAttackSoundID);
+			mSoundPool.unload(mediumSharkAttackSoundID);
+			mSoundPool.unload(longSharkAttackSoundID);
+			mSoundPool.release();
+			mSoundPool = null;
+		}
+
+		mAudioManager.setSpeakerphoneOn(false);
+		mAudioManager.unloadSoundEffects();
+
+		super.onPause();
+	}
+	
 	@Override
 	public void onBackPressed() {
 		
@@ -121,6 +202,23 @@ public class MainActivity extends Activity implements OnItemClickListener {
 		});
 		dialogBuilder.create().show();
 	}
+	
+	//CommunicationListener METHODS
+	@Override
+	public void notifyIncomeMessage(Object object) {
+
+		if (object != null) {
+			new MessageReceiverThread(object).start();
+		}
+	}
+
+	@Override
+	public void notifySentMessage(Object object, String receiverIP, boolean sent) {
+
+		if (object != null) {
+			new AckReceiverThread(object, receiverIP, sent).start();
+		}
+	}	
 	
 	//OTHER METHODS
 	public void loadContestsListView() {

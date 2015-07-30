@@ -11,4 +11,5 @@ public class Constants {
 	public static final float DEFAULT_REWARD_13_POINTS = 20;
 	public static final float DEFAULT_REWARD_12_POINTS = 8;
 	public static final float DEFAULT_REWARD_11_POINTS = 4;
+	public static final String PC_IP_ADDRESS = "192.168.0.5";
 }

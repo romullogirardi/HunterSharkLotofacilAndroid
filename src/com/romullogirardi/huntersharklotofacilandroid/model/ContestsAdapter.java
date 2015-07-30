@@ -1,5 +1,6 @@
 package com.romullogirardi.huntersharklotofacilandroid.model;
 
+import java.util.Iterator;
 import java.util.Vector;
 
 import android.annotation.SuppressLint;
@@ -14,9 +15,10 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.romullogirardi.huntersharklotofacil.protocol.Games;
 import com.romullogirardi.huntersharklotofacilandroid.R;
+import com.romullogirardi.huntersharklotofacilandroid.model.network.Communicator;
 
 @SuppressLint("InflateParams")
 public class ContestsAdapter extends BaseAdapter {
@@ -106,7 +108,38 @@ public class ContestsAdapter extends BaseAdapter {
 			
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(context, "Imprimir", Toast.LENGTH_LONG).show();
+				AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context);
+				dialogBuilder.setTitle("Imprimir");
+				dialogBuilder.setMessage("Enviar os jogos do concurso " + contest.getId() + " para impressão?");
+				
+				dialogBuilder.setNegativeButton("Não", new DialogInterface.OnClickListener() {
+					
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						dialog.dismiss();
+					}
+				});
+
+				dialogBuilder.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+					
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						int index = 0;
+						int[][] gamesNumbers = new int[Constants.GAMES_QUANTITY][15];
+						for(Game game : contest.getRecommendedGames()) {
+							int[] numbers = new int[game.getNumbers().size()];
+						    Iterator<Integer> iterator = game.getNumbers().iterator();
+						    for (int i = 0; i < numbers.length; i++) {
+						        numbers[i] = iterator.next().intValue();
+						    }
+							gamesNumbers[index++] = numbers;
+						}
+						Communicator.getInstance().sendMessage(new Games(gamesNumbers), Constants.PC_IP_ADDRESS);
+						dialog.dismiss();
+					}
+				});
+				
+				dialogBuilder.create().show();
 			}
 		});
 		
@@ -118,6 +151,7 @@ public class ContestsAdapter extends BaseAdapter {
 			
 			@Override
 			public void onClick(View v) {
+
 				AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context);
 				dialogBuilder.setTitle("Apostar");
 				dialogBuilder.setMessage("Os jogos do concurso " + contest.getId() + " foram apostados?");
@@ -139,7 +173,7 @@ public class ContestsAdapter extends BaseAdapter {
 						dialog.dismiss();
 					}
 				});
-				
+
 				dialogBuilder.create().show();
 			}
 		});
@@ -149,9 +183,36 @@ public class ContestsAdapter extends BaseAdapter {
 			
 			@Override
 			public void onClick(View v) {
-				new HTMLParserFromURL().execute(String.valueOf(contest.getId()));
+
+				if(!contest.isBet()) {
+					AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(GlobalReferences.applicationContext);
+					dialogBuilder.setTitle("Jogo não apostado");
+					dialogBuilder.setMessage("Este jogo ainda não consta como apostado. Tem certeza que deseja prosseguir com o carregamento dos resultados do concurso?");
+	
+					dialogBuilder.setNegativeButton("Não", new DialogInterface.OnClickListener() {
+						
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							dialog.dismiss();
+						}
+					});
+	
+					dialogBuilder.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+						
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							new HTMLParserFromURL().execute(String.valueOf(contest.getId()));
+						}
+					});
+	
+					dialogBuilder.create().show();
+				}
+				else {
+					new HTMLParserFromURL().execute(String.valueOf(contest.getId()));
+				}
 			}
 		});
+		
 		
 		return convertView;
 	}
