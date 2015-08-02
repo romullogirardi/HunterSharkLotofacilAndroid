@@ -119,12 +119,24 @@ public class HTMLParserFromURL extends AsyncTask<String, Void, Contest> {
 			boolean validReward = (rewardStr.isEmpty()) ? false : true;
 			switch (rewardIndex) {
 			case 0:
-				reward15points = (validReward) ? Float.parseFloat(rewardStr.replace(".", "").replace(",", ".")) : Constants.DEFAULT_REWARD_15_POINTS;
-				System.out.println("Reward15points = " + reward15points);
+				try {
+					reward15points = (validReward) ? Float.parseFloat(rewardStr.replace(".", "").replace(",", ".")) : Constants.DEFAULT_REWARD_15_POINTS;
+					System.out.println("Reward15points = " + reward15points);
+				}
+				catch(NumberFormatException e) {
+					reward15points = Constants.DEFAULT_REWARD_15_POINTS;
+					System.out.println("Reward15points = NÂO HOUVE ACERTADOR");
+				}
 				break;
 			case 1:
-				reward14points = (validReward) ? Float.parseFloat(rewardStr.replace(".", "").replace(",", ".")) : Constants.DEFAULT_REWARD_14_POINTS;
-				System.out.println("Reward14points = " + reward14points);
+				try {
+					reward14points = (validReward) ? Float.parseFloat(rewardStr.replace(".", "").replace(",", ".")) : Constants.DEFAULT_REWARD_14_POINTS;
+					System.out.println("Reward14points = " + reward14points);
+				}
+				catch(NumberFormatException e) {
+					reward14points = Constants.DEFAULT_REWARD_14_POINTS;
+					System.out.println("Reward15points = NÂO HOUVE ACERTADOR");
+				}
 				break;
 			case 2:
 				reward13points = (validReward) ? Float.parseFloat(rewardStr.replace(".", "").replace(",", ".")) : Constants.DEFAULT_REWARD_13_POINTS;

@@ -14,11 +14,13 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.romullogirardi.huntersharklotofacilandroid.R;
 import com.romullogirardi.huntersharklotofacilandroid.model.Contest;
 import com.romullogirardi.huntersharklotofacilandroid.model.ContestManager;
 import com.romullogirardi.huntersharklotofacilandroid.model.ContestsAdapter;
+import com.romullogirardi.huntersharklotofacilandroid.model.Game;
 import com.romullogirardi.huntersharklotofacilandroid.model.GameStrategy;
 import com.romullogirardi.huntersharklotofacilandroid.model.GlobalReferences;
 import com.romullogirardi.huntersharklotofacilandroid.model.network.AckReceiverThread;
@@ -42,8 +44,7 @@ public class MainActivity extends Activity implements OnItemClickListener, Commu
 	private SoundPool mSoundPool;
 	//SoundIDs
 	private int shortSharkAttackSoundID;
-	private int mediumSharkAttackSoundID;
-	private int longSharkAttackSoundID;
+	private int sharkAttackSoundID;
 	//Audio volume
 	private float mStreamVolume;
 
@@ -115,23 +116,38 @@ public class MainActivity extends Activity implements OnItemClickListener, Commu
 			@Override
 			public void onLoadComplete(SoundPool soundPool, int sampleId, int status) {
 				if (status == 0) {
-//					updateUI();
 				}
 			}
 		});
 
 		//Load the sounds from res/raw (.wav)
-//		shortSharkAttackSoundID = mSoundPool.load(this, R.raw.certo, 1);
-//		mediumSharkAttackSoundID = mSoundPool.load(this, R.raw.errado, 1);
-//		longSharkAttackSoundID = mSoundPool.load(this, R.raw.teste_finalizado, 1);
+		shortSharkAttackSoundID = mSoundPool.load(this, R.raw.short_shark_attack, 1);
+		sharkAttackSoundID = mSoundPool.load(this, R.raw.shark_attack, 1);
 
 		mAudioManager.setSpeakerphoneOn(true);
 		mAudioManager.loadSoundEffects();
 
 		loadContestsListView();
 		if(afterManualInput) {
-			//Notify reward
-			mSoundPool.play(shortSharkAttackSoundID, mStreamVolume, mStreamVolume, 1, 0, 1.0f);
+			Contest contestRewarded = ContestManager.getInstance().getContestsToShow().get(ContestManager.getInstance().getContestsToShow().size() - 2);
+			if(contestRewarded.isBet()) {
+				float reward = 0;
+				for(Game game : contestRewarded.getRecommendedGames()) {
+					reward += game.getReward();
+				}
+				if(reward > 0) {
+					int soundID;
+					if(reward > 80) {
+						soundID = sharkAttackSoundID;
+					}
+					else {
+						soundID = shortSharkAttackSoundID;
+					}
+					//Notify reward
+					mSoundPool.play(soundID, mStreamVolume, mStreamVolume, 1, 0, 1.0f);
+					Toast.makeText(this, "R$ " + reward + " ganhos no concurso " + contestRewarded.getId(), Toast.LENGTH_LONG).show();
+				}
+			}
 		}
 		afterManualInput = false;
 	}	
@@ -142,8 +158,7 @@ public class MainActivity extends Activity implements OnItemClickListener, Commu
 		//Release all SoundPool resources
 		if (mSoundPool != null) {
 			mSoundPool.unload(shortSharkAttackSoundID);
-			mSoundPool.unload(mediumSharkAttackSoundID);
-			mSoundPool.unload(longSharkAttackSoundID);
+			mSoundPool.unload(sharkAttackSoundID);
 			mSoundPool.release();
 			mSoundPool = null;
 		}
