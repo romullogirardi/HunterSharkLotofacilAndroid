@@ -49,6 +49,7 @@ public class HTMLParserFromURL extends AsyncTask<String, Void, Contest> {
 			htmlFile = Jsoup.connect(URL).get();
 		} catch (IOException e) {
 			CustomWidgets.showToast("Falha no carregamento", Toast.LENGTH_LONG);
+			return null;
 		}
 		
 		//Reading contests from HTML file		
@@ -139,8 +140,14 @@ public class HTMLParserFromURL extends AsyncTask<String, Void, Contest> {
 				}
 				break;
 			case 2:
-				reward13points = (validReward) ? Float.parseFloat(rewardStr.replace(".", "").replace(",", ".")) : Constants.DEFAULT_REWARD_13_POINTS;
-				System.out.println("Reward13points = " + reward13points);
+				try {
+					reward13points = (validReward) ? Float.parseFloat(rewardStr.replace(".", "").replace(",", ".")) : Constants.DEFAULT_REWARD_13_POINTS;
+					System.out.println("Reward13points = " + reward13points);
+				}
+				catch(NumberFormatException e) {
+					CustomWidgets.showToast("Prêmios ainda não divulgados", Toast.LENGTH_LONG);
+					return null;
+				}
 				break;
 			case 3:
 				reward12points = (validReward) ? Float.parseFloat(rewardStr.replace(".", "").replace(",", ".")) : Constants.DEFAULT_REWARD_12_POINTS;
