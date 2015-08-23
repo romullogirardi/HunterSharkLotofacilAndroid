@@ -393,6 +393,16 @@ public class ContestManager implements Serializable {
 		}
 		return totalBetInvestment;
 	}
+	
+	public Contest getContest(int contestID) {
+		
+		for(Contest contest : getContestsToShow()) {
+			if(contest.getId() == contestID) {
+				return contest;
+			}
+		}
+		return null;
+	}
 
 	//FILE MANIPULATION METHODS
 	public void readFile() {

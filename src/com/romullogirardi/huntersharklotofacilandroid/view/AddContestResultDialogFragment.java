@@ -126,7 +126,7 @@ public class AddContestResultDialogFragment extends DialogFragment{
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				addContestResults();
-				((MainActivity) getActivity()).setAfterManualInput(true);
+				((MainActivity) getActivity()).notifyReward(Integer.parseInt(contestID));
 				((MainActivity) getActivity()).loadContestsListView();
 				dialog.dismiss();
 			}

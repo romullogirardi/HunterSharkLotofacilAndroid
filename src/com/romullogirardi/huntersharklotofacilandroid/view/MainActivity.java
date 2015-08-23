@@ -47,16 +47,7 @@ public class MainActivity extends Activity implements OnItemClickListener, Commu
 	private int sharkAttackSoundID;
 	//Audio volume
 	private float mStreamVolume;
-
 	
-	//VARIABLE
-	private boolean afterManualInput = false;
-	
-	//SETTER
-	public void setAfterManualInput(boolean afterManualInput) {
-		this.afterManualInput = afterManualInput;
-	}
-
 	//ACTIVITY LIFECYCLE METHODS
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -128,28 +119,6 @@ public class MainActivity extends Activity implements OnItemClickListener, Commu
 		mAudioManager.loadSoundEffects();
 
 		loadContestsListView();
-		if(afterManualInput) {
-			Contest contestRewarded = ContestManager.getInstance().getContestsToShow().get(ContestManager.getInstance().getContestsToShow().size() - 2);
-			if(contestRewarded.isBet()) {
-				float reward = 0;
-				for(Game game : contestRewarded.getRecommendedGames()) {
-					reward += game.getReward();
-				}
-				if(reward > 0) {
-					int soundID;
-					if(reward > 80) {
-						soundID = sharkAttackSoundID;
-					}
-					else {
-						soundID = shortSharkAttackSoundID;
-					}
-					//Notify reward
-					mSoundPool.play(soundID, mStreamVolume, mStreamVolume, 1, 0, 1.0f);
-					Toast.makeText(this, "R$ " + reward + " ganhos no concurso " + contestRewarded.getId(), Toast.LENGTH_LONG).show();
-				}
-			}
-		}
-		afterManualInput = false;
 	}	
 		
 	@Override
@@ -260,6 +229,28 @@ public class MainActivity extends Activity implements OnItemClickListener, Commu
 			investmentTextView.setVisibility(View.GONE);
 			profitTextView.setVisibility(View.GONE);
 			emptyContestsTextView.setVisibility(View.VISIBLE);
+		}
+	}
+	
+	public void notifyReward(int contestID) {
+		Contest contestRewarded = ContestManager.getInstance().getContest(contestID);
+		if(contestRewarded != null && contestRewarded.isBet()) {
+			float reward = 0;
+			for(Game game : contestRewarded.getRecommendedGames()) {
+				reward += game.getReward();
+			}
+			if(reward > 0) {
+				int soundID;
+				if(reward > 80) {
+					soundID = sharkAttackSoundID;
+				}
+				else {
+					soundID = shortSharkAttackSoundID;
+				}
+				//Notify reward
+				mSoundPool.play(soundID, mStreamVolume, mStreamVolume, 1, 0, 1.0f);
+				Toast.makeText(this, "R$ " + reward + " ganhos no concurso " + contestRewarded.getId(), Toast.LENGTH_LONG).show();
+			}
 		}
 	}
 }
