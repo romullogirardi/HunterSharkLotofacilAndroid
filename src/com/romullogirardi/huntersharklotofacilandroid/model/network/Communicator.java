@@ -4,7 +4,6 @@ import server.udp.EnumResultado;
 import server.udp.ServerReturn;
 import server.udp.ServidorUDP2;
 
-
 public class Communicator implements ServerReturn {
 
 	//ATRIBUTO

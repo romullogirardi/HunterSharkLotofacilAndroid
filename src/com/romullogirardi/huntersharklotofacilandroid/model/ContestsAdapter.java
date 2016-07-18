@@ -207,6 +207,7 @@ public class ContestsAdapter extends BaseAdapter {
 		});
 		
 		
+		
 		return convertView;
 	}
 
