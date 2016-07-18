@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.romullogirardi.huntersharklotofacilandroid.R;
@@ -35,11 +36,17 @@ public class AddContestResultDialogFragment extends DialogFragment{
 	
 	//VARIABLES
 	private String contestID;
+	private Contest contestResult = null;
 	private ToggleButton[] toggleButtons = new ToggleButton[25];
 	
-	//CONSTRUCTOR
+	//CONSTRUCTORS
 	public AddContestResultDialogFragment(String contestID) {
 		this.contestID = contestID;
+	}
+
+	public AddContestResultDialogFragment(Contest contestResult) {
+		this.contestResult = contestResult;
+		this.contestID = String.valueOf(contestResult.getId());
 	}
 	
 	//DIALOGFRAGMENT LIFECYCLE METHODS
@@ -82,10 +89,24 @@ public class AddContestResultDialogFragment extends DialogFragment{
 		reward13pointsEditText = (EditText) view.findViewById(R.id.edit_text_reward_13_points);
 		reward12pointsEditText = (EditText) view.findViewById(R.id.edit_text_reward_12_points);
 		reward11pointsEditText = (EditText) view.findViewById(R.id.edit_text_reward_11_points);
-//		NumberFormat mNumberFormat = new DecimalFormat("0.00");
-		reward13pointsEditText.setText(String.valueOf(Constants.DEFAULT_REWARD_13_POINTS));
-		reward12pointsEditText.setText(String.valueOf(Constants.DEFAULT_REWARD_12_POINTS));
-		reward11pointsEditText.setText(String.valueOf(Constants.DEFAULT_REWARD_11_POINTS));
+		if(contestResult == null) {
+			reward13pointsEditText.setText(String.format("%.2f", Constants.DEFAULT_REWARD_13_POINTS).replace(",", "."));
+			reward12pointsEditText.setText(String.format("%.2f", Constants.DEFAULT_REWARD_12_POINTS).replace(",", "."));
+			reward11pointsEditText.setText(String.format("%.2f", Constants.DEFAULT_REWARD_11_POINTS).replace(",", "."));
+			Toast.makeText(getActivity(), "Não foi possível carregar os dados deste concurso. Insira-os manualmente", Toast.LENGTH_LONG).show();
+		}
+		else {
+			for(int number : contestResult.getNumbers()) {
+				toggleButtons[number - 1].setChecked(true); 
+			}
+			datePicker.updateDate(contestResult.getDate().get(Calendar.YEAR), contestResult.getDate().get(Calendar.MONTH), contestResult.getDate().get(Calendar.DAY_OF_MONTH));
+			cityEditText.setText(contestResult.getPlace());
+			reward15pointsEditText.setText(String.format("%.2f", contestResult.getReward15points()).replace(",", "."));
+			reward14pointsEditText.setText(String.format("%.2f", contestResult.getReward14points()).replace(",", "."));
+			reward13pointsEditText.setText(String.format("%.2f", contestResult.getReward13points()).replace(",", "."));
+			reward12pointsEditText.setText(String.format("%.2f", contestResult.getReward12points()).replace(",", "."));
+			reward11pointsEditText.setText(String.format("%.2f", contestResult.getReward11points()).replace(",", "."));
+		}
 		
 		//Building the dialog
 		AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
@@ -105,6 +126,7 @@ public class AddContestResultDialogFragment extends DialogFragment{
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				addContestResults();
+				((MainActivity) getActivity()).notifyReward(Integer.parseInt(contestID));
 				((MainActivity) getActivity()).loadContestsListView();
 				dialog.dismiss();
 			}
@@ -134,6 +156,7 @@ public class AddContestResultDialogFragment extends DialogFragment{
 		float reward11points = Float.parseFloat(reward11pointsEditText.getText().toString());
 		
 		Contest contestResults = new Contest(Integer.parseInt(contestID), date, city, numbers, reward15points, reward14points, reward13points, reward12points, reward11points);
+		contestResults.setBet(ContestManager.getInstance().getContestsToShow().lastElement().isBet());
 		ContestManager.getInstance().computeLastContest(contestResults);
 	}
 }

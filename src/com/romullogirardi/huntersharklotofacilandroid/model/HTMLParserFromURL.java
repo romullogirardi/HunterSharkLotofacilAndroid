@@ -1,8 +1,6 @@
 package com.romullogirardi.huntersharklotofacilandroid.model;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import org.jsoup.Jsoup;
@@ -10,202 +8,173 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import android.content.Context;
+import com.romullogirardi.huntersharklotofacilandroid.utils.CustomWidgets;
+import com.romullogirardi.huntersharklotofacilandroid.view.AddContestResultDialogFragment;
+import com.romullogirardi.huntersharklotofacilandroid.view.MainActivity;
 
-public class HTMLParserFromURL {
-//	
-//	//CONSTANTS
-//	private static final String HTML_URL = "http://www.loterias.caixa.gov.br/wps/portal/loterias/landing/lotofacil";
-//	
-//	private static final int CONTEST_ID_INDEX = 0;
-//	private static final int CONTEST_DATE_INDEX = 1;
-//	private static final int CONTEST_SELECTED_NUMBER_1_INDEX = 2;	
-//	private static final int CONTEST_SELECTED_NUMBER_2_INDEX = 3;	
-//	private static final int CONTEST_SELECTED_NUMBER_3_INDEX = 4;	
-//	private static final int CONTEST_SELECTED_NUMBER_4_INDEX = 5;	
-//	private static final int CONTEST_SELECTED_NUMBER_5_INDEX = 6;	
-//	private static final int CONTEST_SELECTED_NUMBER_6_INDEX = 7;	
-//	private static final int CONTEST_SELECTED_NUMBER_7_INDEX = 8;	
-//	private static final int CONTEST_SELECTED_NUMBER_8_INDEX = 9;	
-//	private static final int CONTEST_SELECTED_NUMBER_9_INDEX = 10;	
-//	private static final int CONTEST_SELECTED_NUMBER_10_INDEX = 11;	
-//	private static final int CONTEST_SELECTED_NUMBER_11_INDEX = 12;	
-//	private static final int CONTEST_SELECTED_NUMBER_12_INDEX = 13;	
-//	private static final int CONTEST_SELECTED_NUMBER_13_INDEX = 14;	
-//	private static final int CONTEST_SELECTED_NUMBER_14_INDEX = 15;	
-//	private static final int CONTEST_SELECTED_NUMBER_15_INDEX = 16;	
-//	private static final int CONTEST_CITY_INDEX = 19;	
-//	private static final int CONTEST_STATE_INDEX = 20;	
-//	private static final int CONTEST_REWARD_15_POINTS_INDEX = 25;	
-//	private static final int CONTEST_REWARD_14_POINTS_INDEX = 26;	
-//	private static final int CONTEST_REWARD_13_POINTS_INDEX = 27;	
-//	private static final int CONTEST_REWARD_12_POINTS_INDEX = 28;	
-//	private static final int CONTEST_REWARD_11_POINTS_INDEX = 29;	
-//	
-//	public static final float DEFAULT_REWARD_15_POINTS = 1000000;
-//	public static final float DEFAULT_REWARD_14_POINTS = 1500;
-//	public static final float DEFAULT_REWARD_13_POINTS = 20;
-//	public static final float DEFAULT_REWARD_12_POINTS = 8;
-//	public static final float DEFAULT_REWARD_11_POINTS = 4;
-//
-//	//ATTRIBUTES
-//	private static Document htmlFile;
-//	
-//	//METHODS
-//	private static void parseHtmlFile() {
-//		
-//		try {
-//			htmlFile = Jsoup.connect(HTML_URL).get();
-//		} 
-//		catch (IOException e) {
-//			 e.printStackTrace();
-//		}	
-//	}
-//	
-//	public static void readContestFromHTMLFile(Context context) {
-//		
-//		//Parsing HTML file
-//		parseHtmlFile();
-//
-//		//Reading contest from HTML file		
-//			if(!rowElements.get(columnIndex).text().isEmpty()) {
-//				switch(columnIndex) {
-//					case CONTEST_ID_INDEX:
-//						try {
-//							id = Integer.parseInt(rowElements.get(columnIndex).text());
-//						} catch (Exception e) {
-////								System.out.println("ID inválido");
-//						}
-//						break;
-//					case CONTEST_DATE_INDEX:
-//						String readDate = rowElements.get(columnIndex).text();
-//						if(readDate.length() == 10) {
-//							String dayStr = readDate.substring(0, 2);
-//							String monthStr = readDate.substring(3, 5);
-//							String yearStr = readDate.substring(6);
-//							try {
-//								int day = Integer.parseInt(dayStr);
-//								int month = Integer.parseInt(monthStr);
-//								int year = Integer.parseInt(yearStr);
-//								date = new GregorianCalendar(year, month - 1, day);
-//							} catch (Exception e) {
-////									System.out.println("Data inválida");
-//							}
-//						}
-//						break;
-//					case CONTEST_SELECTED_NUMBER_1_INDEX:
-//						numbers[0] = Integer.parseInt(rowElements.get(columnIndex).text());
-//						break;
-//					case CONTEST_SELECTED_NUMBER_2_INDEX:
-//						numbers[1] = Integer.parseInt(rowElements.get(columnIndex).text());
-//						break;
-//					case CONTEST_SELECTED_NUMBER_3_INDEX:
-//						numbers[2] = Integer.parseInt(rowElements.get(columnIndex).text());
-//						break;
-//					case CONTEST_SELECTED_NUMBER_4_INDEX:
-//						numbers[3] = Integer.parseInt(rowElements.get(columnIndex).text());
-//						break;
-//					case CONTEST_SELECTED_NUMBER_5_INDEX:
-//						numbers[4] = Integer.parseInt(rowElements.get(columnIndex).text());
-//						break;
-//					case CONTEST_SELECTED_NUMBER_6_INDEX:
-//						numbers[5] = Integer.parseInt(rowElements.get(columnIndex).text());
-//						break;
-//					case CONTEST_SELECTED_NUMBER_7_INDEX:
-//						numbers[6] = Integer.parseInt(rowElements.get(columnIndex).text());
-//						break;
-//					case CONTEST_SELECTED_NUMBER_8_INDEX:
-//						numbers[7] = Integer.parseInt(rowElements.get(columnIndex).text());
-//						break;
-//					case CONTEST_SELECTED_NUMBER_9_INDEX:
-//						numbers[8] = Integer.parseInt(rowElements.get(columnIndex).text());
-//						break;
-//					case CONTEST_SELECTED_NUMBER_10_INDEX:
-//						numbers[9] = Integer.parseInt(rowElements.get(columnIndex).text());
-//						break;
-//					case CONTEST_SELECTED_NUMBER_11_INDEX:
-//						numbers[10] = Integer.parseInt(rowElements.get(columnIndex).text());
-//						break;
-//					case CONTEST_SELECTED_NUMBER_12_INDEX:
-//						numbers[11] = Integer.parseInt(rowElements.get(columnIndex).text());
-//						break;
-//					case CONTEST_SELECTED_NUMBER_13_INDEX:
-//						numbers[12] = Integer.parseInt(rowElements.get(columnIndex).text());
-//						break;
-//					case CONTEST_SELECTED_NUMBER_14_INDEX:
-//						numbers[13] = Integer.parseInt(rowElements.get(columnIndex).text());
-//						break;
-//					case CONTEST_SELECTED_NUMBER_15_INDEX:
-//						numbers[14] = Integer.parseInt(rowElements.get(columnIndex).text());
-//						break;
-//					case CONTEST_CITY_INDEX:
-//						place = rowElements.get(columnIndex).text();
-//						break;
-//					case CONTEST_STATE_INDEX:
-//						place += "/" + rowElements.get(columnIndex).text();
-//						break;
-//					case CONTEST_REWARD_15_POINTS_INDEX:
-//						String readReward15PointsStr = toFloatStringFormat(rowElements.get(columnIndex).text());
-//						float readReward15Points = Float.parseFloat(readReward15PointsStr);
-//						if(readReward15Points != 0) {
-//							reward15points = readReward15Points;
-//						}
-//						break;
-//					case CONTEST_REWARD_14_POINTS_INDEX:
-//						String readReward14PointsStr = toFloatStringFormat(rowElements.get(columnIndex).text());
-//						float readReward14Points = Float.parseFloat(readReward14PointsStr);
-//						if(readReward14Points != 0) {
-//							reward14points = readReward14Points;
-//						}
-//						break;
-//					case CONTEST_REWARD_13_POINTS_INDEX:
-//						String readReward13PointsStr = toFloatStringFormat(rowElements.get(columnIndex).text());
-//						float readReward13Points = Float.parseFloat(readReward13PointsStr);
-//						if(readReward13Points != 0) {
-//							reward13points = readReward13Points;
-//						}
-//						break;
-//					case CONTEST_REWARD_12_POINTS_INDEX:
-//						String readReward12PointsStr = toFloatStringFormat(rowElements.get(columnIndex).text());
-//						float readReward12Points = Float.parseFloat(readReward12PointsStr);
-//						if(readReward12Points != 0) {
-//							reward12points = readReward12Points;
-//						}
-//						break;
-//					case CONTEST_REWARD_11_POINTS_INDEX:
-//						String readReward111PointsStr = toFloatStringFormat(rowElements.get(columnIndex).text());
-//						float readReward11Points = Float.parseFloat(readReward111PointsStr);
-//						if(readReward11Points != 0) {
-//							reward11points = readReward11Points;
-//						}
-//						break;
-//				}
-//			}
-//			
-//			//Adding a contest, if it´s valid
-//			if(id != -1) {
-//				ContestManager.getInstance().computeLastContest(new Contest(id, date, place, numbers, reward15points, reward14points, reward13points, reward12points, reward11points, false));
-//			}
-//		}
-//		
-//		//Reading additional contests, if necessary
-//		if(!isHtmlEnough) {
-//			readAdditionalContests();
-//		}
-//	}
-//	
-//	private static String toFloatStringFormat(String notFloatStringFormat) {
-//		String temp = notFloatStringFormat.replace(".", "");
-//		String floatStringFormat = temp.replace(",", ".");
-//		return floatStringFormat;
-//	}
-//	
-//	private static void readAdditionalContests() {
-//		int[] numbers1 = {1, 2, 3, 7, 10, 12, 14, 15, 17, 18, 20, 21, 22, 23, 24};
-//		ContestManager.getInstance().computeLastContest(new Contest(1216, new GregorianCalendar(2015, 5, 01), "OSASCO/SP", numbers1, (float) 775596.57, (float) 1435.45, (float) 20, (float) 8, (float) 4, false));
-//		int[] numbers2 = {1, 3, 6, 7, 8, 9, 10, 11, 12, 13, 17, 19, 20, 24, 25};
-//		ContestManager.getInstance().computeLastContest(new Contest(1217, new GregorianCalendar(2015, 5, 03), "PIQUEROBI/SP", numbers2, (float) 1984077.81, (float) 2394.06, (float) 20, (float) 8, (float) 4, true));
-//		int[] numbers3 = {1 , 2, 3, 4, 5, 7, 9, 10, 11, 13, 14, 18, 20, 21, 23};
-//		ContestManager.getInstance().computeLastContest(new Contest(1218, new GregorianCalendar(2015, 5, 05), "OSASCO/SP", numbers3, (float) 1052205.73, (float) 2394.06, (float) 20, (float) 8, (float) 4, true));
-//	}
+import android.app.ProgressDialog;
+import android.os.AsyncTask;
+import android.widget.Toast;
+
+public class HTMLParserFromURL extends AsyncTask<String, Void, Contest> {
+	
+	//CONSTANTS
+	private static final String URL = "http://www.loterias.caixa.gov.br/wps/portal/loterias/landing/lotofacil";
+
+	//VARIABLES
+	String contestIDStr;
+	
+	//UI ELEMENTS
+	ProgressDialog progressDialog;
+        
+	@Override
+    protected void onPreExecute() {
+        super.onPreExecute();
+        progressDialog = new ProgressDialog(GlobalReferences.applicationContext);
+        progressDialog.setMessage("Carregando os dados do concurso...");
+        progressDialog.setIndeterminate(false);
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+    }
+
+	@Override
+    protected Contest doInBackground(String... args) {
+
+		//Setting contestID
+		this.contestIDStr = args[0];
+		
+		//Parsing HTML file
+		Document htmlFile = null;
+		try {
+			htmlFile = Jsoup.connect(URL).get();
+		} catch (IOException e) {
+			CustomWidgets.showToast("Falha no carregamento", Toast.LENGTH_LONG);
+			return null;
+		}
+		
+		//Reading contests from HTML file		
+		String idDateDescription = htmlFile.select("#resultados").select("h2").select("span").text();
+		String idDate = idDateDescription.replace("Concurso ", "");
+		String idStr = "";
+		int id = -1;
+		String dayStr = "";;
+		int day = -1;
+		String monthStr = "";;
+		int month = -1;
+		String yearStr = "";;
+		int year = -1;
+		for(int index = 0; index < idDate.length(); index++) {
+			if(index <= 3) {
+				idStr += idDate.charAt(index);
+			}
+			else if(index == 6 || index == 7) {
+				dayStr += idDate.charAt(index);
+			}
+			else if(index == 9 || index == 10) {
+				monthStr += idDate.charAt(index);
+			}
+			else if(index >= 12 && index <= 15) {
+				yearStr += idDate.charAt(index);
+			}
+		}
+		id = Integer.parseInt(idStr);
+		day = Integer.parseInt(dayStr);
+		month = Integer.parseInt(monthStr);
+		year = Integer.parseInt(yearStr);
+		System.out.println("ID = " + id);
+		System.out.println("\nDay = " + day);
+		System.out.println("Month = " + month);
+		System.out.println("Year = " + year);
+
+		String placeDescription = htmlFile.select(".resultado-loteria").select("p.description").text();
+		String place = placeDescription.substring(placeDescription.indexOf("em") + 3).replace(", ", "/");
+		System.out.println("\nPlace = " + place);
+		
+		Element table = htmlFile.select("table").get(0);
+		Elements tableRows = table.select("tr");
+		int[] numbers = new int[15];
+		int numberIndex = 0;
+		for(Element tableRow : tableRows) {
+			Elements rowElements = tableRow.select("td");			
+			for(Element tableColumn : rowElements) {
+				numbers[numberIndex++] = Integer.parseInt(tableColumn.text());
+			}
+		}
+		System.out.println("\nNumbers:");
+		for(int number : numbers) {
+			System.out.print(number + "\t");
+		}
+		System.out.println();
+		
+		System.out.println("\nRewards:");
+		Elements rewardDescriptions = htmlFile.select(".content-section.section-text.with-box.column-right.no-margin-top").select("p");
+		float reward15points = -1;
+		float reward14points = -1;
+		float reward13points = -1;
+		float reward12points = -1;
+		float reward11points = -1;
+		for(int rewardIndex = 0; rewardIndex <= 4; rewardIndex++) {
+			String rewardDescription = rewardDescriptions.get(rewardIndex).text();
+			String rewardStr = rewardDescription.substring(rewardDescription.indexOf("$") + 2);
+			
+			boolean validReward = (rewardStr.isEmpty()) ? false : true;
+			switch (rewardIndex) {
+			case 0:
+				try {
+					reward15points = (validReward) ? Float.parseFloat(rewardStr.replace(".", "").replace(",", ".")) : Constants.DEFAULT_REWARD_15_POINTS;
+					System.out.println("Reward15points = " + reward15points);
+				}
+				catch(NumberFormatException e) {
+					reward15points = Constants.DEFAULT_REWARD_15_POINTS;
+					System.out.println("Reward15points = NÂO HOUVE ACERTADOR");
+				}
+				break;
+			case 1:
+				try {
+					reward14points = (validReward) ? Float.parseFloat(rewardStr.replace(".", "").replace(",", ".")) : Constants.DEFAULT_REWARD_14_POINTS;
+					System.out.println("Reward14points = " + reward14points);
+				}
+				catch(NumberFormatException e) {
+					reward14points = Constants.DEFAULT_REWARD_14_POINTS;
+					System.out.println("Reward15points = NÂO HOUVE ACERTADOR");
+				}
+				break;
+			case 2:
+				try {
+					reward13points = (validReward) ? Float.parseFloat(rewardStr.replace(".", "").replace(",", ".")) : Constants.DEFAULT_REWARD_13_POINTS;
+					System.out.println("Reward13points = " + reward13points);
+				}
+				catch(NumberFormatException e) {
+					CustomWidgets.showToast("Prêmios ainda não divulgados", Toast.LENGTH_LONG);
+					return null;
+				}
+				break;
+			case 3:
+				reward12points = (validReward) ? Float.parseFloat(rewardStr.replace(".", "").replace(",", ".")) : Constants.DEFAULT_REWARD_12_POINTS;
+				System.out.println("Reward12points = " + reward12points);
+				break;
+			case 4:
+				reward11points = (validReward) ? Float.parseFloat(rewardStr.replace(".", "").replace(",", ".")) : Constants.DEFAULT_REWARD_11_POINTS;
+				System.out.println("Reward11points = " + reward11points);
+				break;
+			}
+		}
+		
+		if(id == Integer.parseInt(contestIDStr)) {
+			return new Contest(id, new GregorianCalendar(year, month - 1, day), place, numbers, reward15points, reward14points, reward13points, reward12points, reward11points);
+		}
+		else {
+			return null;
+		}
+    }
+
+    protected void onPostExecute(Contest contestResult) {
+
+    	progressDialog.dismiss();
+        if(contestResult != null) {
+            new AddContestResultDialogFragment(contestResult).show(((MainActivity) GlobalReferences.applicationContext).getFragmentManager(), AddContestResultDialogFragment.class.getSimpleName());
+        } else {
+            new AddContestResultDialogFragment(contestIDStr).show(((MainActivity) GlobalReferences.applicationContext).getFragmentManager(), AddContestResultDialogFragment.class.getSimpleName());
+        }
+    }
 }

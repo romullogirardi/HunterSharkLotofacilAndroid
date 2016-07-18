@@ -6,5 +6,6 @@
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
 	<classpathentry exported="true" kind="lib" path="libs/jsoup-1.8.2.jar"/>
+	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/ServidorUDP"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

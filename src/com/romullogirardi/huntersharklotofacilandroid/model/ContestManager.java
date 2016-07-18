@@ -132,7 +132,7 @@ public class ContestManager implements Serializable {
 			//Increasing total investment and reward
 			totalRecommendedInvestment += game.getInvestment();
 			totalRecommendedReward += game.getReward();
-			if(contests.lastElement().isBet()) {
+			if(lastContestResult.isBet()) {
 				totalBetInvestment += game.getInvestment();
 				totalBetReward += game.getReward();
 			}
@@ -156,6 +156,7 @@ public class ContestManager implements Serializable {
 		contests.lastElement().setReward13points(lastContestResult.getReward13points());
 		contests.lastElement().setReward12points(lastContestResult.getReward12points());
 		contests.lastElement().setReward11points(lastContestResult.getReward11points());
+		contests.lastElement().setBet(lastContestResult.isBet());
 	}
 	
 	private void updateControllers(Contest lastContestResult) {
@@ -344,15 +345,15 @@ public class ContestManager implements Serializable {
 			contestDetails += "Lucro: R$ " + String.format("%.2f", (contest.getBetReward() - contest.getBetInvestment())) + "\n";
 		}
 		
-		contestDetails += "\nFrequência dos números:\n";
-		for(NumberFrequency numberFrequency : numbersFrequency) {
-			contestDetails += numberFrequency.getNumber() + " => " + numberFrequency.getFrequency() + "\n";
-		}
-
-		contestDetails += "\nTodos os concursos:\n";
-		for(int index = 0; index < contests.size() - 1; index++) {
-			contestDetails += contests.get(index).toString() + "\n";
-		}
+//		contestDetails += "\nFrequência dos números:\n";
+//		for(NumberFrequency numberFrequency : numbersFrequency) {
+//			contestDetails += numberFrequency.getNumber() + " => " + numberFrequency.getFrequency() + "\n";
+//		}
+//
+//		contestDetails += "\nTodos os concursos:\n";
+//		for(int index = 0; index < contests.size() - 1; index++) {
+//			contestDetails += contests.get(index).toString() + "\n";
+//		}
 
 		return contestDetails;
 	}
@@ -391,6 +392,16 @@ public class ContestManager implements Serializable {
 			totalBetInvestment += contest.getBetInvestment();
 		}
 		return totalBetInvestment;
+	}
+	
+	public Contest getContest(int contestID) {
+		
+		for(Contest contest : getContestsToShow()) {
+			if(contest.getId() == contestID) {
+				return contest;
+			}
+		}
+		return null;
 	}
 
 	//FILE MANIPULATION METHODS

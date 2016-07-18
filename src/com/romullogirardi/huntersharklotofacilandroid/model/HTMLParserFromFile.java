@@ -212,9 +212,15 @@ public class HTMLParserFromFile{
 			}
 			
 			//Adding a contest, if it´s valid
-//			if(id != -1 && id >= Constants.INITIAL_CONTEST_ID) {
 			if(id != -1) {
-				ContestManager.getInstance().computeLastContest(new Contest(id, date, place, numbers, reward15points, reward14points, reward13points, reward12points, reward11points));
+				boolean bet = false; 
+				if(id >= Constants.INITIAL_SHOWN_CONTEST_ID) {
+					bet = true;
+				}
+				Contest contest = new Contest(id, date, place, numbers, reward15points, reward14points, reward13points, reward12points, reward11points);
+				contest.setBet(bet);
+				ContestManager.getInstance().computeLastContest(contest);
+				
 			}
 		}
 	}

@@ -1,10 +1,10 @@
 <resources>
 
-    <string name="app_name">Hunter Shark</string>
+    <string name="app_name">Tubarão</string>
     <string name="recompensa_dois_pontos">"Recompensa:\nR$ "</string>
     <string name="investimento_dois_pontos">"Investimento:\nR$ "</string>
     <string name="lucro_dois_pontos">"Lucro:\nR$ "</string>
-    <string name="concurso">"ID"</string>
+    <string name="concurso">"Concurso"</string>
     <string name="jogo1">"Jogo 1"</string>
     <string name="jogo2">"Jogo 2"</string>
     <string name="jogo3">"Jogo 3"</string>
