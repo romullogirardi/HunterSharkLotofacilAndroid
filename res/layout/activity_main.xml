@@ -40,16 +40,6 @@
 		    android:textSize="@dimen/text_size_header"
 		    android:text="@string/jogo2"/>
 	
-		<TextView 
-		    android:layout_width="0dip"
-		    android:layout_height="wrap_content"
-		    android:layout_weight="1"
-		    android:gravity="center"
-		    android:textColor="@android:color/white"
-		    android:textStyle="bold"
-		    android:textSize="@dimen/text_size_header"
-		    android:text="@string/jogo3"/>
-	
 		<Space 
 		    android:layout_width="0dip"
 		    android:layout_height="wrap_content"

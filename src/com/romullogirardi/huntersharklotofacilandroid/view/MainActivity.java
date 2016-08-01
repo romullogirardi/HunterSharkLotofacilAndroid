@@ -58,11 +58,11 @@ public class MainActivity extends Activity implements OnItemClickListener, Commu
 
 		//Setting application
 		int[] indexes1 = {2, 3, 4, 5, 7, 10, 12, 13, 16, 17, 18, 19, 21, 23, 24};
-		int[] indexes2 = {2, 5, 6, 7, 8, 9, 10, 14, 15, 16, 18, 19, 20, 21, 23};
+//		int[] indexes2 = {2, 5, 6, 7, 8, 9, 10, 14, 15, 16, 18, 19, 20, 21, 23};
 		int[] indexes3 = {0, 2, 3, 4, 7, 11, 12, 13, 14, 16, 17, 18, 20, 21, 22};
 		Vector<GameStrategy> gameStrategies = new Vector<GameStrategy>();
 		gameStrategies.add(new GameStrategy(indexes1));
-		gameStrategies.add(new GameStrategy(indexes2));
+//		gameStrategies.add(new GameStrategy(indexes2));
 		gameStrategies.add(new GameStrategy(indexes3));
 		ContestManager.getInstance().setGameStrategies(gameStrategies);
 		ContestManager.getInstance().setContestsPartition(30);

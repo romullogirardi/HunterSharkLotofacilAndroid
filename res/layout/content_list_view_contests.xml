@@ -31,14 +31,6 @@
 	    android:gravity="center"
 	    android:text="Teste"/>
 
-	<TextView 
-	 	android:id="@+id/text_view_contest_game3"
-	    android:layout_width="0dip"
-	    android:layout_height="match_parent"
-	    android:layout_weight="1"
-	    android:gravity="center"
-	    android:text="Teste"/>
-
 	<ImageView 
 	 	android:id="@+id/image_view_print"
 	    android:layout_width="0dip"

@@ -2,7 +2,7 @@ package com.romullogirardi.huntersharklotofacilandroid.model;
 
 public class Constants {
 	public static final float GAME_PRIZE = (float) 3;
-	public static final int GAMES_QUANTITY = 3;
+	public static final int GAMES_QUANTITY = 2;
 	public static final String FILE_NAME = "backup_file.szb";
 	public static final int INITIAL_CONTEST_ID = 1357;
 	public static final int INITIAL_SHOWN_CONTEST_ID = 1389;

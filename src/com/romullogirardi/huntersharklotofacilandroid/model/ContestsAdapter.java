@@ -61,7 +61,6 @@ public class ContestsAdapter extends BaseAdapter {
 			viewHolder.idTextView = (TextView) convertView.findViewById(R.id.text_view_contest_id);
 			viewHolder.game1TextView = (TextView) convertView.findViewById(R.id.text_view_contest_game1);
 			viewHolder.game2TextView = (TextView) convertView.findViewById(R.id.text_view_contest_game2);
-			viewHolder.game3TextView = (TextView) convertView.findViewById(R.id.text_view_contest_game3);
 			viewHolder.printImageView = (ImageView) convertView.findViewById(R.id.image_view_print);
 			viewHolder.betImageView = (ImageView) convertView.findViewById(R.id.image_view_bet);
 			viewHolder.resultsImageView = (ImageView) convertView.findViewById(R.id.image_view_results);
@@ -82,18 +81,12 @@ public class ContestsAdapter extends BaseAdapter {
 			viewHolder.game2TextView.setBackgroundColor((contest.getRecommendedGames().get(1).getPoints() >= 11) ? context.getResources().getColor(R.color.green) : context.getResources().getColor(android.R.color.white));
 			viewHolder.game2TextView.setTextColor((contest.getRecommendedGames().get(1).getPoints() >= 11) ? context.getResources().getColor(android.R.color.white) : context.getResources().getColor(android.R.color.black));
 			viewHolder.game2TextView.setTypeface(null, (contest.getRecommendedGames().get(1).getPoints() >= 11) ? Typeface.BOLD : Typeface.NORMAL);
-			viewHolder.game3TextView.setText(String.valueOf(contest.getRecommendedGames().get(2).getPoints()));
-			viewHolder.game3TextView.setBackgroundColor((contest.getRecommendedGames().get(2).getPoints() >= 11) ? context.getResources().getColor(R.color.green) : context.getResources().getColor(android.R.color.white));
-			viewHolder.game3TextView.setTextColor((contest.getRecommendedGames().get(2).getPoints() >= 11) ? context.getResources().getColor(android.R.color.white) : context.getResources().getColor(android.R.color.black));
-			viewHolder.game3TextView.setTypeface(null, (contest.getRecommendedGames().get(2).getPoints() >= 11) ? Typeface.BOLD : Typeface.NORMAL);
 		}
 		else {
 			viewHolder.game1TextView.setText(" ---- ");
 			viewHolder.game1TextView.setBackgroundColor(context.getResources().getColor(android.R.color.white));
 			viewHolder.game2TextView.setText(" ---- ");
 			viewHolder.game2TextView.setBackgroundColor(context.getResources().getColor(android.R.color.white));
-			viewHolder.game3TextView.setText(" ---- ");
-			viewHolder.game3TextView.setBackgroundColor(context.getResources().getColor(android.R.color.white));
 		}
 		
 		viewHolder.printImageView.setEnabled(contest.getNumbers() == null);
@@ -216,7 +209,6 @@ public class ContestsAdapter extends BaseAdapter {
 		TextView idTextView;
 		TextView game1TextView;
 		TextView game2TextView;
-		TextView game3TextView;
 		ImageView printImageView;
 		ImageView betImageView;
 		ImageView resultsImageView;
